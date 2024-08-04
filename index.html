@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="index.css">
+    <title>BrowserPaint</title>
+</head>
+<body>
+<header>
+    <h3>BrowserPaint</h3>
+    <div class="settings">
+        <label for="brushSizeSlider" id="brushSizeLabel">Brush Size (NOT SET)</label>
+        <input type="range" name="brushSize" id="brushSizeSlider" min="1" max="30" value="10">
+        <button onclick="clearCanvas()">Clear Canvas</button>
+    </div>
+</header>
+<canvas class="main-canvas" id="canvas"></canvas>
+<script src="index.js"></script>
+<!-- Для тестирования, не совместим с индекс файлом -->
+<!--<script src="experimental.js"></script>-->
+</body>
+</html>
