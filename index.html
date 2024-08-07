@@ -15,7 +15,7 @@
         <div class="settings__size">
             <label for="brushSizeSlider" id="brushSizeLabel">Brush Size (NOT SET)</label>
             <input type="range" name="brushSize" id="brushSizeSlider" min="1" max="30" value="10">
-            <button onclick="clearCanvas()">Clear Canvas</button>
+            <button id="clearButton">Clear Canvas</button>
         </div>
 
         <div class="settings__color">
@@ -24,7 +24,7 @@
     </div>
 </header>
 <canvas class="main-canvas" id="canvas"></canvas>
-<script src="index.js"></script>
+<script type="module" src="index.js"></script>
 <!-- Для тестирования, не совместим с индекс файлом -->
 <!--<script src="experimental.js"></script>-->
 </body>
