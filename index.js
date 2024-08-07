@@ -69,3 +69,4 @@ function clearCanvas() {
 
 document.querySelector("#clearButton").addEventListener("click", clearCanvas);
 document.querySelector("#undoButton").addEventListener("click", () => exporter.pop());
+document.querySelector("#saveToJson").addEventListener("click", () => exporter.exportToImage());

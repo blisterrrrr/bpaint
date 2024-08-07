@@ -34,6 +34,15 @@ export class Exporter {
         this.holder.getContext().putImageData(this.story[this.index], 0, 0);
     }
 
+    exportToImage() {
+        const link = document.createElement("a");
+        link.setAttribute('download', 'Name.png');
+        this.holder.canvas.toBlob((blob) => {
+            link.setAttribute('href', URL.createObjectURL(blob));
+            link.click();
+        })
+    }
+
     dbgPrint() {
         console.log(this.story);
         console.log(this.index);
