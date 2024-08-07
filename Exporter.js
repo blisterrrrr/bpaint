@@ -5,10 +5,14 @@ export class Exporter {
         this.holder = canvasHolder;
     }
 
-    add() {
+    getImgData() {
         const width = this.holder.canvas.width;
         const height = this.holder.canvas.height;
-        this.story.push(this.holder.getContext().getImageData(0, 0, width, height));
+        return this.holder.getContext().getImageData(0, 0, width, height);
+    }
+
+    add() {
+        this.story.push(this.getImgData());
         this.index += 1;
     }
 
