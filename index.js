@@ -1,4 +1,6 @@
-import { CanvasHolder } from "./canvasHolder.js"
+import {CanvasHolder} from "./canvasHolder.js"
+import {Exporter} from "./Exporter.js";
+
 const sizeSlider = document.querySelector("#brushSizeSlider");
 const sizeLabel = document.querySelector("#brushSizeLabel");
 sizeLabel.innerText = `Brush Size (${sizeSlider.value})`;
@@ -47,17 +49,23 @@ function draw(e) {
     cvctx.stroke();
 }
 
+const exporter = new Exporter(cvclass);
+
 function stop(e) {
     // e.preventDefault();
     if (!isDrawing) return
     cvctx.stroke();
     cvctx.closePath();
     isDrawing = false;
+    exporter.add();
+    exporter.dbgPrint();
 }
 
 function clearCanvas() {
     if (isDrawing) return
     cvctx.clearRect(0, 0, canvas.width, canvas.height);
+    exporter.reset();
 }
 
 document.querySelector("#clearButton").addEventListener("click", clearCanvas);
+document.querySelector("#undoButton").addEventListener("click", () => exporter.pop());
