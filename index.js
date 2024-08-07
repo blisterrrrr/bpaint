@@ -6,8 +6,13 @@ let color = "black";
 let brushSize = sizeSlider.value;
 sizeSlider.addEventListener("change", (e) => {
     brushSize = e.currentTarget.value;
-    sizeLabel.innerText = `Brush Size (${e.currentTarget.value})`
+    sizeLabel.innerText = `Brush Size (${e.currentTarget.value})`;
 });
+
+const colorPicker = document.querySelector("#brushColorPicker");
+colorPicker.addEventListener("change", (e) => {
+    color = e.target.value;
+})
 
 const canvas = document.querySelector('#canvas');
 const cvctx = canvas.getContext('2d');

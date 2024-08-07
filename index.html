@@ -12,9 +12,15 @@
 <header>
     <h3>BrowserPaint</h3>
     <div class="settings">
-        <label for="brushSizeSlider" id="brushSizeLabel">Brush Size (NOT SET)</label>
-        <input type="range" name="brushSize" id="brushSizeSlider" min="1" max="30" value="10">
-        <button onclick="clearCanvas()">Clear Canvas</button>
+        <div class="settings__size">
+            <label for="brushSizeSlider" id="brushSizeLabel">Brush Size (NOT SET)</label>
+            <input type="range" name="brushSize" id="brushSizeSlider" min="1" max="30" value="10">
+            <button onclick="clearCanvas()">Clear Canvas</button>
+        </div>
+
+        <div class="settings__color">
+            <input value="#000000" type="color" name="brushColor" id="brushColorPicker">
+        </div>
     </div>
 </header>
 <canvas class="main-canvas" id="canvas"></canvas>
