@@ -7,4 +7,9 @@ header {
 
 .main-canvas {
     border: 2px lightgray dashed;
+    position: absolute;
+}
+
+.btn-active {
+    border: 2px purple solid;
 }

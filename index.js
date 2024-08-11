@@ -1,69 +1,117 @@
 import {CanvasHolder} from "./canvasHolder.js"
 import {Exporter} from "./Exporter.js";
+import { TOOLS, Toolset } from "./Toolset.js";
+
+const cvclass = new CanvasHolder("#canvas", 1000, 500);
+const canvas = cvclass.getCanvas();
+const cvctx = cvclass.setupCanvas("black", 10, "round", "round");
+const ocvclass = new CanvasHolder("#overlayCanvas", 1000, 500);
+const ocanvas = ocvclass.getCanvas();
+const ocvctx = ocvclass.setupCanvas("red", 10, "round", "round");
+let isDrawing = false;
 
 const sizeSlider = document.querySelector("#brushSizeSlider");
 const sizeLabel = document.querySelector("#brushSizeLabel");
 sizeLabel.innerText = `Brush Size (${sizeSlider.value})`;
-let isDrawing = false;
-let color = "black";
-let brushSize = sizeSlider.value;
 sizeSlider.addEventListener("change", (e) => {
-    brushSize = e.currentTarget.value;
+    cvclass.setSize(e.currentTarget.value);
+    ocvclass.setSize(e.currentTarget.value);
     sizeLabel.innerText = `Brush Size (${e.currentTarget.value})`;
 });
 
 const colorPicker = document.querySelector("#brushColorPicker");
 colorPicker.addEventListener("change", (e) => {
-    color = e.target.value;
+    cvclass.setColor(e.currentTarget.value);
+    ocvclass.setColor(e.currentTarget.value);
 })
 
-// const canvas = document.querySelector('#canvas');
-// const cvctx = canvas.getContext('2d');
-// canvas.width = 1000;
-// canvas.height = 500;
-
-const cvclass = new CanvasHolder("#canvas", 1000, 500);
-const canvas = cvclass.getCanvas();
-const cvctx = cvclass.getContext();
+const toolSet = new Toolset().setup(TOOLS);
+const toolSelector = document.querySelector("#toolSelect");
+toolSelector.addEventListener('change', (e) => {
+    toolSet.selectTool(e.currentTarget.value);
+})
 
 canvas.addEventListener('mousedown', start);
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', stop);
 canvas.addEventListener('mouseout', stop);
 
+let rectX = null;
+let rectY = null;
+let prevRectX = 0;
+let prevRectY = 0;
+let prevWidth = 0;
+let prevHeight = 0;
+
 function start(e) {
-    // e.preventDefault();
     isDrawing = true;
-    cvctx.beginPath();
+    // console.log(toolSet.getSelected());
+    switch (toolSet.getSelected()) {
+        case 'brush':
+            cvctx.beginPath();
+            break;
+        case 'rectangle':
+            rectX = e.clientX - canvas.offsetLeft;
+            rectY = e.clientY - canvas.offsetTop;
+            break;
+        default:
+            throw new Error("Unknown Tool")
+            break;
+    }
 }
 
 function draw(e) {
-    // e.preventDefault()
     if (!isDrawing) return
-    cvctx.lineTo(e.clientX - canvas.offsetLeft,
-        e.clientY - canvas.offsetTop);
-    cvctx.lineWidth = brushSize;
-    cvctx.strokeStyle = color;
-    cvctx.lineCap = "round";
-    cvctx.lineJoin = "round";
-    cvctx.stroke();
+    switch (toolSet.getSelected()) {
+        case 'brush':
+            cvctx.lineTo(e.clientX - canvas.offsetLeft,
+                e.clientY - canvas.offsetTop);
+            cvctx.stroke();
+            break;
+        case 'rectangle': {
+            let newX = e.clientX - canvas.offsetLeft;
+            let newY = e.clientY - canvas.offsetTop;
+
+            ocvclass.clearCanvas();
+
+            ocvctx.strokeRect(rectX, rectY, newX - rectX, newY - rectY);
+
+            prevRectX = rectX;
+            prevRectY = rectY;
+            prevWidth = newX - rectX;
+            prevHeight = newY - rectY;
+            break;
+        }
+        default:
+            throw new Error();
+            break
+    }
 }
 
 const exporter = new Exporter(cvclass);
 
 function stop(e) {
-    // e.preventDefault();
     if (!isDrawing) return
-    cvctx.stroke();
-    cvctx.closePath();
+    switch (toolSet.getSelected()) {
+        case 'brush':
+            cvctx.stroke();
+            cvctx.closePath();
+        case 'rectangle':
+            cvctx.strokeRect(prevRectX, prevRectY, prevWidth, prevHeight);
+            ocvclass.clearCanvas();
+            break;
+        default:
+            break;
+    }
+
     isDrawing = false;
+    
     exporter.add();
-    exporter.dbgPrint();
 }
 
 function clearCanvas() {
     if (isDrawing) return
-    cvctx.clearRect(0, 0, canvas.width, canvas.height);
+    cvclass.clearCanvas();
     exporter.reset();
 }
 

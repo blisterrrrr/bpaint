@@ -23,9 +23,20 @@
         <div class="settings__color">
             <input value="#000000" type="color" name="brushColor" id="brushColorPicker">
         </div>
+
+        <div class="settings__tool-selection">
+            <p>Current tool: </p>
+            <select id="toolSelect">
+                <option value="brush" selected>Brush</option>
+                <option value="rectangle">Rectangle</option>
+            </select>
+        </div>
     </div>
 </header>
-<canvas class="main-canvas" id="canvas"></canvas>
+<div>
+    <canvas class="main-canvas" id="overlayCanvas"></canvas>
+    <canvas class="main-canvas" id="canvas"></canvas>
+</div>
 <script type="module" src="index.js"></script>
 <!-- Для тестирования, не совместим с индекс файлом -->
 <!--<script src="experimental.js"></script>-->

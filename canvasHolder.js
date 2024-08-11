@@ -15,8 +15,20 @@ export class CanvasHolder {
     }
 
     //TODO закончить рефактор
-    setupCanvas(color, size, caps) {
+    setupCanvas(color, size, cap, join) {
+        this.context.strokeStyle = color;
+        this.context.lineWidth = size;
+        this.context.lineCap = cap;
+        this.context.lineJoin = join;
+        return this.context;
+    }
 
+    setColor(color) {
+        this.context.strokeStyle = color;
+    }
+
+    setSize(size) {
+        this.context.lineWidth = size;
     }
 
     clearCanvas() {
