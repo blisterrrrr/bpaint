@@ -1,4 +1,4 @@
-import {CanvasHolder} from "./canvasHolder.js"
+import {CanvasHolder} from "./CanvasHolder.js"
 import {Exporter} from "./Exporter.js";
 import { TOOLS, Toolset } from "./Toolset.js";
 
