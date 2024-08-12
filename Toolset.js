@@ -29,7 +29,6 @@ export class Toolset {
     }
 
     /**
-     * 
      * @param {string[]} toolsArr 
      */
     setup(toolsArr) {

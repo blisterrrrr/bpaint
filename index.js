@@ -7,7 +7,7 @@ const canvas = cvclass.getCanvas();
 const cvctx = cvclass.setupCanvas("black", 10, "round", "round");
 const ocvclass = new CanvasHolder("#overlayCanvas", 1000, 500);
 const ocanvas = ocvclass.getCanvas();
-const ocvctx = ocvclass.setupCanvas("red", 10, "round", "round");
+const ocvctx = ocvclass.setupCanvas("black", 10, "round", "round");
 let isDrawing = false;
 
 const sizeSlider = document.querySelector("#brushSizeSlider");
