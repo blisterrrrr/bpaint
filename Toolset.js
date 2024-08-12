@@ -50,6 +50,10 @@ export class Toolset {
         this.selected = tool;
     }
 
+    /**
+     * 
+     * @returns {string} - selected tool
+     */
     getSelected() {
         return this.selected;
     }
