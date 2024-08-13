@@ -1,6 +1,7 @@
 import {CanvasHolder} from "./CanvasHolder.js"
 import {Exporter} from "./Exporter.js";
 import { TOOLS, Toolset } from "./Toolset.js";
+import { Utils } from "./utils.js"
 
 const cvclass = new CanvasHolder("#canvas", 1000, 500);
 const canvas = cvclass.getCanvas();
@@ -9,6 +10,7 @@ const ocvclass = new CanvasHolder("#overlayCanvas", 1000, 500);
 const ocanvas = ocvclass.getCanvas();
 const ocvctx = ocvclass.setupCanvas("black", 10, "round", "round");
 let isDrawing = false;
+cvctx.arc(50, 50, 50, 0, 2 * Math.PI);
 
 const sizeSlider = document.querySelector("#brushSizeSlider");
 const sizeLabel = document.querySelector("#brushSizeLabel");
@@ -42,6 +44,7 @@ let prevRectX = 0;
 let prevRectY = 0;
 let prevWidth = 0;
 let prevHeight = 0;
+let prevRaduis = 0;
 
 function start(e) {
     isDrawing = true;
@@ -54,6 +57,20 @@ function start(e) {
             rectX = e.clientX - canvas.offsetLeft;
             rectY = e.clientY - canvas.offsetTop;
             break;
+        // case 'circle':
+        //     rectX = e.clientX - canvas.offsetLeft;
+        //     rectY = e.clientY - canvas.offsetTop;
+        //     break;
+        case 'line': {
+            rectX = e.clientX - canvas.offsetLeft;
+            rectY = e.clientY - canvas.offsetTop;
+
+            ocvctx.beginPath();
+            cvctx.beginPath();
+            ocvctx.moveTo(rectX, rectY);
+            cvctx.moveTo(rectX, rectY);
+            break;
+        }
         default:
             throw new Error("Unknown Tool")
             break;
@@ -82,6 +99,35 @@ function draw(e) {
             prevHeight = newY - rectY;
             break;
         }
+        // case 'circle': {
+        //     let newX = e.clientX - canvas.offsetLeft;
+        //     let newY = e.clientY - canvas.offsetTop;
+        //     let radius = Utils.getDistance(rectX, rectY, newX, newY);
+
+        //     ocvclass.clearCanvas();
+
+        //     ocvctx.arc(rectX, rectY, radius, 0, 2 * Math.PI);
+
+        //     prevRectX = rectX;
+        //     prevRectY = rectY;
+        //     prevRaduis = radius;
+        //     break;
+        // }
+        case 'line': {
+            let newX = e.clientX - canvas.offsetLeft;
+            let newY = e.clientY - canvas.offsetTop;
+            
+            ocvctx.closePath();
+            ocvclass.clearCanvas();
+            ocvctx.beginPath();
+            ocvctx.moveTo(rectX, rectY);
+            ocvctx.lineTo(newX, newY);
+            ocvctx.stroke();
+
+            prevRectX = newX;
+            prevRectY = newY;
+            break;
+        }
         default:
             throw new Error();
             break
@@ -100,6 +146,15 @@ function stop(e) {
             cvctx.strokeRect(prevRectX, prevRectY, prevWidth, prevHeight);
             ocvclass.clearCanvas();
             break;
+        // case 'circle':
+        //     cvctx.arc(prevRectX, prevRectY, prevRaduis, 0, Math.PI);
+        //     ocvclass.clearCanvas();
+        //     break;
+        case 'line': 
+            cvctx.lineTo(prevRectX, prevRectY);
+            cvctx.stroke();
+            cvctx.closePath();
+            ocvclass.clearCanvas();
         default:
             break;
     }
