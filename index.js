@@ -1,6 +1,7 @@
 import {CanvasHolder} from "./CanvasHolder.js"
 import {Exporter} from "./Exporter.js";
 import { TOOLS, Toolset } from "./Toolset.js";
+import { DropdownManager } from "./DropdownManager.js";
 import { Utils } from "./utils.js"
 
 const cvclass = new CanvasHolder("#canvas", 1000, 500);
@@ -27,10 +28,9 @@ colorPicker.addEventListener("change", (e) => {
 })
 
 const toolSet = new Toolset().setup(TOOLS);
-const toolSelector = document.querySelector("#toolSelect");
-toolSelector.addEventListener('change', (e) => {
-    toolSet.selectTool(e.currentTarget.value);
-})
+const dropdowns = new DropdownManager("#toolSelectDrop")
+    .setup((tool) => toolSet.selectTool(tool))
+    .init();
 
 canvas.addEventListener('mousedown', start);
 canvas.addEventListener('mousemove', draw);

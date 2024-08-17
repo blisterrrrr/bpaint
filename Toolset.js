@@ -40,9 +40,10 @@ export class Toolset {
     }
 
     /**
-     * @param {string} tool 
+     * @param {string} toolRndCase
      */
-    selectTool(tool) {
+    selectTool(toolRndCase) {
+        const tool = toolRndCase.toLowerCase();
         console.log(`${tool} is being selected`)
         // if (!this.checkTool(tool)) return;
         console.log(`${tool} is selected`)

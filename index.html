@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="main.css">
     <title>BrowserPaint</title>
 </head>
 <body>
@@ -25,13 +25,24 @@
         </div>
 
         <div class="settings__tool-selection">
-            <p>Current tool: </p>
-            <select id="toolSelect">
+            <p style="margin-bottom: 0;">Current tool: </p>
+            <!-- <select id="toolSelect">
                 <option value="brush" selected>Brush</option>
                 <option value="rectangle">Rectangle</option>
                 <option value="circle">Circle</option>
                 <option value="line">Line</option>
-            </select>
+            </select> -->
+            <div class="select" id="toolSelectDrop">
+                <div class="select__selected">
+                    <span class="select__selectedtxt">Brush</span>
+                </div>
+                <ul class="select__menu">
+                    <li class="select__menu-active">Brush</li>
+                    <li>Rectangle</li>
+                    <li>Circle</li>
+                    <li>Line</li>
+                </ul>
+            </div>
         </div>
     </div>
 </header>
