@@ -3,6 +3,7 @@ import { Exporter } from "./Exporter.js";
 import { TOOLS, Toolset } from "./Toolset.js";
 import { DropdownManager } from "./DropdownManager.js";
 import { Utils } from "./utils.js"
+import { PopupManager } from "./PopupManager.js";
 
 const cvclass = new CanvasHolder("#canvas", 1000, 500);
 const canvas = cvclass.getCanvas();
@@ -28,7 +29,11 @@ colorPicker.addEventListener("change", (e) => {
 })
 
 const toolSet = new Toolset().setup(TOOLS);
-const dropdowns = new DropdownManager("#toolSelectDrop")
+// new DropdownManager("#toolSelectDrop")
+//   .setup((tool) => toolSet.selectTool(tool))
+//   .init();
+
+const popup = new PopupManager("#toolPopup", "#ppOpen")
   .setup((tool) => toolSet.selectTool(tool))
   .init();
 
