@@ -50,6 +50,51 @@
     <canvas class="main-canvas" id="overlayCanvas"></canvas>
     <canvas class="main-canvas" id="canvas"></canvas>
 </div>
+<div class="swrapper">
+  <div class="symsearch symsearch-disabled">
+    <div class="symsearch__header">
+      <p>Search for figures <i class="fi fi-rs-search"></i></p>
+      <svg class="symsearch__header-close" width="20" height="20" viewbox="0 0 40 40"><path d="M 10,10 L 30,30 M 30,10 L 10,30" stroke="black" stroke-width="4" /></svg>
+    </div>
+    <div class="symsearch__searchbar">
+      <input type="text" placeholder="Start typing"/>
+    </div> 
+      <div class="symsearch__variants">
+        <div class="symsearch__variant">
+            <div class="symsearch__variant-img">
+              <img src="imgs/paint-brush.png" alt="brush">
+            </div>
+            <div class="symsearch__variant-text">
+              <p>Brush</p>
+            </div>
+        </div>
+        <div class="symsearch__variant">
+            <div class="symsearch__variant-img">
+              <img src="imgs/stop.png" alt="rectangle">
+            </div>
+            <div class="symsearch__variant-text">
+              <p>Rectangle</p>
+            </div>
+        </div>
+        <div class="symsearch__variant">
+            <div class="symsearch__variant-img">
+              <img src="imgs/dry-clean.png" alt="circle">
+            </div>
+            <div class="symsearch__variant-text">
+              <p>Circle</p>
+            </div>
+        </div>
+        <div class="symsearch__variant">
+            <div class="symsearch__variant-img">
+              <img src="imgs/line.png" alt="line">
+            </div>
+            <div class="symsearch__variant-text">
+              <p>Line</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>    
 <script type="module" src="index.js"></script>
 <!-- Для тестирования, не совместим с индекс файлом -->
 <!--<script src="experimental.js"></script>-->
