@@ -32,10 +32,10 @@ new DropdownManager("#toolSelectDrop")
     .setup((tool) => toolSet.selectTool(tool))
     .init();
 
-canvas.addEventListener('mousedown', start);
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mouseup', stop);
-canvas.addEventListener('mouseout', stop);
+ocanvas.addEventListener('mousedown', start);
+ocanvas.addEventListener('mousemove', draw);
+ocanvas.addEventListener('mouseup', stop);
+ocanvas.addEventListener('mouseout', stop);
 
 let rectX = null;
 let rectY = null;
