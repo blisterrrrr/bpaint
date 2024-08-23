@@ -28,7 +28,7 @@ colorPicker.addEventListener("change", (e) => {
 })
 
 const toolSet = new Toolset().setup(TOOLS);
-const dropdowns = new DropdownManager("#toolSelectDrop")
+new DropdownManager("#toolSelectDrop")
     .setup((tool) => toolSet.selectTool(tool))
     .init();
 
