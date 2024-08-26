@@ -4,6 +4,7 @@ import { TOOLS, Toolset } from "./Toolset.js";
 import { DropdownManager } from "./DropdownManager.js";
 import { Utils } from "./utils.js"
 import { PopupManager } from "./PopupManager.js";
+import { ColorPicker } from "./ColorPicker.js";
 
 const cvclass = new CanvasHolder("#canvas", 1000, 500);
 const canvas = cvclass.getCanvas();
@@ -22,11 +23,19 @@ sizeSlider.addEventListener("change", (e) => {
   sizeLabel.innerText = `Brush Size (${e.currentTarget.value})`;
 });
 
-const colorPicker = document.querySelector("#brushColorPicker");
-colorPicker.addEventListener("change", (e) => {
-  cvclass.setColor(e.currentTarget.value);
-  ocvclass.setColor(e.currentTarget.value);
-})
+// const colorPicker = document.querySelector("#brushColorPicker");
+// colorPicker.addEventListener("change", (e) => {
+//   cvclass.setColor(e.currentTarget.value);
+//   ocvclass.setColor(e.currentTarget.value);
+//   console.log(e.currentTarget.value);
+// })
+new ColorPicker("#colorPicker", 150, 120, "#colorIndicator")
+  .setup((color) => {
+    cvclass.setColor(color);
+    ocvclass.setColor(color);
+    console.log(color);
+  })
+  .init();
 
 const toolSet = new Toolset().setup(TOOLS);
 // new DropdownManager("#toolSelectDrop")

@@ -5,9 +5,21 @@ header {
   gap: 12px;
 }
 
+.settings__color {
+  display: flex;
+}
+
 .main-canvas {
   border: 2px lightgray dashed;
   position: absolute;
+}
+
+.colorExample {
+  border: 1px solid black;
+  border-radius: 5px;
+  background: black;
+  width: 50px;
+  height: 50px;
 }
 
 .btn-active {
